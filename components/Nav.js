@@ -11,7 +11,7 @@ export default function Nav() {
   })
   
   return (
-    <div className="px-4 sm:px-6 lg:px-8 bg-white sticky top-0 z-50 border-b border-gray-100">
+    <div className="px-4 sm:px-6 lg:px-8 bg-white sticky top-0 z-20 border-b border-gray-100">
       <div className="flex h-16 justify-between">
         <div className="flex">
           <Link href={'/'} className="flex items-center w-10">

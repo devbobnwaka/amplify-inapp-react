@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^4.3.8",
     "@headlessui/react": "^1.7.11",
     "@heroicons/react": "^2.0.16",
     "@next/font": "13.1.6",
     "@tailwindcss/forms": "^0.5.3",
+    "aws-amplify": "^5.0.16",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",

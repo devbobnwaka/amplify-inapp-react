@@ -1,12 +1,22 @@
-import { CartProvider } from 'react-use-cart';
-import '@/styles/globals.css';
+import { CartProvider } from "react-use-cart";
+import "@/styles/globals.css";
 
+import { Amplify } from "aws-amplify";
+import awsconfig from "../src/aws-exports";
 
+Amplify.configure(awsconfig);
 
-export default function App({ Component, pageProps }) {
-  
+import { withInAppMessaging } from "@aws-amplify/ui-react";
 
-  return <CartProvider>
-    <Component {...pageProps} />
-  </CartProvider>;
+import "@aws-amplify/ui-react/styles.css";
+import Notification from "@/components/Notification";
+
+function App({ Component, pageProps }) {
+  return (
+    <CartProvider>
+      <Component {...pageProps} />
+    </CartProvider>
+  );
 }
+
+export default withInAppMessaging(App, {components: {BannerMessage: Notification}});

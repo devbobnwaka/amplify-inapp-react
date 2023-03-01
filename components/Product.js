@@ -1,12 +1,29 @@
-import React from 'react';
-import { useCart } from 'react-use-cart';
+import React from "react";
+import { useCart } from "react-use-cart";
+import { Notifications } from "aws-amplify";
 
-import ProductCard from './ProductCard';
-import ProductInfo from './ProductInfo';
+import ProductCard from "./ProductCard";
+import ProductInfo from "./ProductInfo";
+
+const { InAppMessaging } = Notifications;
 
 function Product({ product }) {
-  const { addItem, inCart, updateItemQuantity, getItem } = useCart();
+  React.useEffect(() => {
+    InAppMessaging.syncMessages();
+  }, []);
+  const { addItem, inCart, updateItemQuantity, getItem, totalItems } =
+    useCart();
   const addToCart = (product) => {
+    if (totalItems < 1) {
+      // TODO
+      // Use attributes to force discount for specific products
+      // Different discount for different products
+      InAppMessaging.dispatchEvent({ name: "cart_20" });
+      // For TS
+      // We understand that developers love TypeScript and we are 
+      // working on improving support to enhance your experience
+    }
+
     if (inCart(product.id)) {
       let currentItemQuantity = getItem(product.id).quantity;
       updateItemQuantity(product.id, (currentItemQuantity += 1));
@@ -15,7 +32,10 @@ function Product({ product }) {
     }
   };
 
-  const removeFromCart = (product) => {
+  const removeFromCart = async (product) => {
+    // if (totalItems == 1) {
+    //   await InAppMessaging.clearMessages();
+    // }
     let currentItemQuantity = getItem(product.id).quantity;
     updateItemQuantity(product.id, (currentItemQuantity -= 1));
   };
