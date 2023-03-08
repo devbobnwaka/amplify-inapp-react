@@ -18,7 +18,8 @@ function Product({ product }) {
       // TODO
       // Use attributes to force discount for specific products
       // Different discount for different products
-      InAppMessaging.dispatchEvent({ name: "cart_20" });
+      console.log(product.positiveAdjective)
+      InAppMessaging.dispatchEvent({ name: "cart_15", attributes: {adj: product.positiveAdjective} });
       // For TS
       // We understand that developers love TypeScript and we are 
       // working on improving support to enhance your experience
